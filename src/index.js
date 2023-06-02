@@ -1,13 +1,37 @@
-import React from 'react';
+import React, { Children } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {createBrowserRouter, RouterProvider, Route} from 'react-router-dom'
+
+//Paginas
+import Home from './routes/Home.jsx'
+import NewPost from './routes/NewPost.jsx'
+
+//Objeto de configuração de roteamento
+const router= createBrowserRouter([
+    {
+      element: <App/>,
+      children:[
+        {
+          path: '/',  //Home - todos os posts
+          element: <Home/>,
+        },
+        {
+          path:'/new', //Novo post
+          element: <NewPost/>,
+        }
+      ]
+    }
+])
+
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
   </React.StrictMode>
 );
 
